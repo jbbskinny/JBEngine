@@ -1,4 +1,4 @@
-%% Description
+## Description
 This is a (very basic) search engine that takes your search and lists the top
 ten results from Twitter and Wiki.  It uses each site's API and sends in a 
 search query.
@@ -8,7 +8,7 @@ API authentication requirements.  I must first deploy it on a web server using
 HTTPS protocol and continue the debug process.  See last commit for the
 Twitter API (with Lebron James search hardcoded).
 
-%% Goals
+## Goals
 1. Deploy on server.
 2. Have a results only page.
 3. Give option to search only Twitter or Wikipedia.
