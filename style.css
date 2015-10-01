@@ -53,3 +53,24 @@ main button {
 	border-radius: 5px;
 }
 
+.results-list {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	background: white;
+	border: 3px solid darkslategrey;
+	border-radius: 5px;
+}
+
+.results-list h2 {
+	text-align: center;
+}
+
+dt {
+    font-weight: bold;
+    text-decoration: underline;
+ }
+
+ dd {
+    margin: 0;
+    padding: 0 0 0.5em 0;
+ }
