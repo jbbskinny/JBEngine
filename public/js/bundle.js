@@ -1906,8 +1906,8 @@ var success = function (data) {
 var config = {
     "consumerKey": "HaMzggtHF05HBEDeut07xfZBW",
     "consumerSecret": "7Yk0mPLK9UYQBudLqZFIdTTbQw3rluGnPtH4wsh7rs8aHIrMF2",
-    "accessToken": "3718692552-BkdpThqM2fwFe3xuZgb7aMDE6k2jYcuiw2GaXKi",
-    "accessTokenSecret": "PDUXLvYompEA8JxwzpVEiaMKxBTfuz42suZBRTiHs9QEp",
+    "accessToken": "3718692552-9H4jdt0U8L6ceKFnwRBJKjLcCvewtraRkiHJBaw",
+    "accessTokenSecret": "De2DuNBRKslyVVCD2HM7HN0HGSFRBRIv2Lyno4F8AXAHT",
     "callBackUrl": "http://www.google.com"
 }
 
