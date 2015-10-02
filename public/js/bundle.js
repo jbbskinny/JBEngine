@@ -1908,7 +1908,7 @@ var config = {
     "consumerSecret": "7Yk0mPLK9UYQBudLqZFIdTTbQw3rluGnPtH4wsh7rs8aHIrMF2",
     "accessToken": "3718692552-BkdpThqM2fwFe3xuZgb7aMDE6k2jYcuiw2GaXKi",
     "accessTokenSecret": "PDUXLvYompEA8JxwzpVEiaMKxBTfuz42suZBRTiHs9QEp",
-    "callBackUrl": "http://localhost:8080"
+    "callBackUrl": "http://www.google.com"
 }
 
 var Twitter = require('twitter-node-client').Twitter;
