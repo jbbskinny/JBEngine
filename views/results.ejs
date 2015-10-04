@@ -4,7 +4,7 @@
 		<title>JBEngine</title>
 
 		<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/superhero/bootstrap.min.css" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="./public/css/style.css">
+		<link rel="stylesheet" type="text/css" href="./public/css/results_style.css">
 
 		<script src="https://code.jquery.com/jquery-2.1.4.min.js"/></script>
 
@@ -15,15 +15,23 @@
 			<h1>
 				<span class="initials">JB</span><span class="engine">Engine</span>
 			</h1>
+
+			<div class="form-input-box">
+				<form method="post" action="results">
+					<input id="input" type="text" name="search">
+					<button id="searchButton">+</button>
+				</form>
+			</div>
+
 		</header>
 
 		<main>
-			<input id="input" type="text"><button id="searchButton">+</button>
-
 			<div id="twitter-results" class="results-list">
+				<%- twitterResults %>
 			</div>
 
 			<div id="wiki-results" class="results-list">
+				<%- wikiResults %>
 			</div>
 		</main>
 

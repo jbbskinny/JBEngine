@@ -23,10 +23,7 @@ app.get('/', function(req, res) {
     res.render('index');
 });
 
-app.post('/results', urlencodedParser, function (req, res) {
-	console.log(req.body.search);
-	res.render('results');
-});
+app.post('/results', urlencodedParser, results.show);
 
 app.listen(port, function() {
     console.log('Our app is running on http://localhost:' + port);
