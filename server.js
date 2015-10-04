@@ -25,7 +25,7 @@ app.get('/', function(req, res) {
 
 app.post('/results', urlencodedParser, function (req, res) {
 	console.log(req.body.search);
-	res.send('results');
+	res.render('results');
 });
 
 app.listen(port, function() {
