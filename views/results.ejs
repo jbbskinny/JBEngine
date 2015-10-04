@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>JBEngine</title>
+
+		<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/superhero/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="./public/css/results_style.css">
+
+		<script src="https://code.jquery.com/jquery-2.1.4.min.js"/></script>
+
+	</head>
+
+	<body>
+		<header>
+			<h1>
+				<span class="initials">JB</span><span class="engine">Engine</span>
+			</h1>
+
+			<div class="form-input-box">
+				<form method="post" action="results">
+					<input id="input" type="text" name="search">
+					<button id="searchButton">+</button>
+				</form>
+			</div>
+
+		</header>
+
+		<main>
+			<div id="twitter-results" class="results-list">
+				<%- twitterResults %>
+			</div>
+
+			<div id="wiki-results" class="results-list">
+				<%- wikiResults %>
+			</div>
+		</main>
+
+		<script type="text/javascript" src="./public/js/history.js"></script>
+		<!---<script type="text/javascript" src="./public/js/wiki.js"></script>-->
+		<!---<script type="text/javascript" src="./public/js/twitter.js"></script>-->
+	</body>
+</html>

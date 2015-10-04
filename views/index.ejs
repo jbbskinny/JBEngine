@@ -18,17 +18,13 @@
 		</header>
 
 		<main>
-			<input id="input" type="text"><button id="searchButton">+</button>
+			<form method="post" action="/results">
+				<input id="input" type="text" name="search">
+				<button id="searchButton">+</button>
+			</form>
 
-			<div id="twitter-results" class="results-list">
-			</div>
-
-			<div id="wiki-results" class="results-list">
-			</div>
 		</main>
 
 		<script type="text/javascript" src="./public/js/history.js"></script>
-		<script type="text/javascript" src="./public/js/wiki.js"></script>
-		<script type="text/javascript" src="./public/js/bundle.js"></script>
 	</body>
 </html>

@@ -1,0 +1,84 @@
+body {
+	padding-top: 0px;
+	width: 855px;
+	margin: auto;
+}
+
+.wiki-results {
+	border-radius: 20px;
+}
+
+header {
+	padding: 10px;
+	overflow: auto;
+	border-bottom: 2px solid black;
+}
+
+header h1 {
+	text-align: left;
+	float:left;
+	font-size: xxx-large;
+}
+
+header .initials {
+	color: blue;
+}
+
+header .engine {
+	color: white;
+	font-style: italic;
+}
+
+.form-input-box {
+	margin-top: 20px;
+}
+
+.form-input-box input {
+	margin-left: 120px;
+	width: 60%;
+	height: 40px;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+.form-input-box button {
+	margin-left: 10px;
+	padding: 10px;
+	background: olivedrab;
+	font-weight: bold;
+	border-radius: 5px;
+}
+
+main {
+	overflow: auto;
+	margin-top: 50px;
+	padding: 10px;
+}
+
+.results-list {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	background: white;
+	border: 3px solid darkslategrey;
+	border-radius: 5px;
+	color: black;
+}
+
+.results-list h2 {
+	text-align: center;
+}
+
+h2 {
+	color: darkslategrey;
+}
+
+dt {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+ dd {
+    margin: 0;
+    padding: 0 0 0.5em 0;
+    color: darkslategrey;
+ }
