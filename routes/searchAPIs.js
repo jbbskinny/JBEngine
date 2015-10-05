@@ -8,6 +8,16 @@ exports.show = function (req, res) {
 	var wikiData = null;
 
 	var searchString = req.body.search;
+	console.log(JSON.stringify(searchString));
+
+	if (searchString === "") {
+		res.render('index', {
+			tryAgain: "<div class='try-again'>" + "Please try again." +
+					  "</div>"
+		});
+
+		return;
+	};
 
 	twitterSearch();
 	wikiSearch();
@@ -35,7 +45,7 @@ exports.show = function (req, res) {
 		var twitter = new Twitter(config);
 
 		twitter.getSearch({'q': searchString, 'count': 10}, error, success);
-	}
+	};
 
 	function wikiSearch () {
 		var query = querystring.stringify({
@@ -83,15 +93,16 @@ exports.show = function (req, res) {
 			complete();
 		})
 
-	}
+	};
 
 	function complete() {
 		if (wikiData !== null && twitterData !== null) {
 			res.render('results', {
+				inputBox: searchString,
 				wikiResults: wikiData, 
 				twitterResults: twitterData
 			});
-		}
+		};
 	};
 };
 
@@ -134,4 +145,4 @@ function twitterDataParser (data) {
 	html += "</dl>"
 
 	return html;
-}
+};
