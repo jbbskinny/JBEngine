@@ -11,13 +11,10 @@ exports.show = function (req, res) {
 	console.log(JSON.stringify(req.body.search));
 
 	if (searchString === "") {
-
-		res.render('index', {
-			tryAgain: "<div class='try-again'>" + "Please try again." +
-					  "</div>"
-		});
+		req.session.blank = true;
+		res.redirect('/');
 		return;
-	};	
+	};
 
 	twitterSearch();
 	wikiSearch();
@@ -179,6 +176,50 @@ function wikiDataParser (data) {
 
     html += "</dl>";
     return html;
+};
+
+exports.testWikiSearch = function (searchString) {
+
+	var query = querystring.stringify({
+		action: 'query',
+		list: 'search',
+		srsearch: searchString,
+		srlimit: 10,
+		srwhat: 'text',
+		format: 'json'
+	});
+	var options = {
+		hostname: 'en.wikipedia.org',
+		path: '/w/api.php?' + query
+	};
+
+	var req = https.request(options, function(res) {
+
+		if (!res) { 
+			wikiData = "<h2>MediaWiki API is currently down.</h2>";
+			return wikiData;
+		};
+
+		var body = '';
+		console.log("statusCode: ", res.statusCode);
+		res.setEncoding('utf8');
+
+		res.on('data', function(data) {
+			body += data;
+		});
+
+		res.on('end', function() {
+			wikiData = wikiDataParser( JSON.parse(body) );
+			return wikiData;
+		});
+	});
+
+	req.end();
+
+	req.on('error', function (err) {
+		wikiData = "<h2>MediaWiki API is currently down.</h2>";
+		return wikiData;
+	});
 };
 
 module.exports.twitterParser = twitterDataParser;

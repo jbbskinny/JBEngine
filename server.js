@@ -1,5 +1,6 @@
 var express = require('express'),
 	bodyParser = require('body-parser'),
+	session = require('express-session');
 	results = require('./routes/searchAPIs');
 
 var app = express();
@@ -13,15 +14,23 @@ app.set('view engine', 'ejs');
 
 // make express look in the public directory for assets (css/js/img)
 app.use('/public', express.static(__dirname + '/public'));
+app.use(session({secret: "jbengine"}));
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 // set the home page route
 app.get('/', function(req, res) {
 
-    res.render('index', {
-    	tryAgain: "<div class='tryAgain' ><p></p></div>"
-    });
+	if (req.session.blank) {
+		req.session.blank = false;
+	    res.render('index', {
+	    	tryAgain: "<div class='try-again' ><p>Please try again.</p></div>"
+	    });
+	} else {
+		res.render('index', {
+    		tryAgain: "<div class='try-again' ><p></p></div>"
+    	});
+    };
 });
 
 // render the results
