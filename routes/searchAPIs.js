@@ -149,7 +149,7 @@ function twitterDataParser (data) {
 	}
 	else {
 		if (data.statuses.length === 0) {
-			html = "<h2>Wiki Results</h2>" + "<p>No search results found.</p>";
+			html = "<h2>Twitter Results</h2>" + "<p>No search results found.</p>";
 			return html;
 		};	
 	};
