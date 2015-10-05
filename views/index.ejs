@@ -6,8 +6,6 @@
 		<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/superhero/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="./public/css/style.css">
 
-		<script src="https://code.jquery.com/jquery-2.1.4.min.js"/></script>
-
 	</head>
 
 	<body>
@@ -20,11 +18,12 @@
 		<main>
 			<form method="post" action="/results">
 				<input id="input" type="text" name="search">
-				<button id="searchButton">+</button>
+				<button id="searchButton">+</button><br>
+				<!---<input type="checkbox" id="geo" name="geo">Twitter: 100mi-->
 			</form>
 
-		</main>
+			<%- tryAgain %>
 
-		<script type="text/javascript" src="./public/js/history.js"></script>
+		</main>
 	</body>
 </html>

@@ -6,8 +6,6 @@
 		<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/superhero/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="./public/css/results_style.css">
 
-		<script src="https://code.jquery.com/jquery-2.1.4.min.js"/></script>
-
 	</head>
 
 	<body>
@@ -18,8 +16,9 @@
 
 			<div class="form-input-box">
 				<form method="post" action="results">
-					<input id="input" type="text" name="search">
-					<button id="searchButton">+</button>
+					<%- inputBox %>
+					<button id="searchButton">+</button><br>
+					<!---<input type="checkbox" id="geo" name="geo">Tweets w/n 100 miles.-->
 				</form>
 			</div>
 
@@ -34,9 +33,4 @@
 				<%- wikiResults %>
 			</div>
 		</main>
-
-		<script type="text/javascript" src="./public/js/history.js"></script>
-		<!---<script type="text/javascript" src="./public/js/wiki.js"></script>-->
-		<!---<script type="text/javascript" src="./public/js/twitter.js"></script>-->
-	</body>
 </html>

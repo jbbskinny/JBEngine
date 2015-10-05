@@ -33,8 +33,14 @@ header .engine {
 	margin-top: 20px;
 }
 
-.form-input-box input {
-	margin-left: 120px;
+.form-input-box input[type=checkbox] {
+	margin:10px;
+	margin-top: 10px;
+	margin-left: 50px;
+}
+
+.form-input-box input[type=text] {
+	margin-left: 50px;
 	width: 60%;
 	height: 40px;
 	font-size: 1.2em;
@@ -56,6 +62,7 @@ main {
 }
 
 .results-list {
+	padding: 10px;
 	margin-top: 10px;
 	margin-bottom: 10px;
 	background: white;
@@ -65,6 +72,7 @@ main {
 }
 
 .results-list h2 {
+	margin-top: 0px;
 	text-align: center;
 }
 
