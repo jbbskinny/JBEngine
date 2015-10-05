@@ -11,11 +11,11 @@ exports.show = function (req, res) {
 	console.log(JSON.stringify(req.body.search));
 
 	if (searchString === "") {
+
 		res.render('index', {
 			tryAgain: "<div class='try-again'>" + "Please try again." +
 					  "</div>"
 		});
-
 		return;
 	};	
 
@@ -93,8 +93,8 @@ exports.show = function (req, res) {
 	function complete() {
 		if (wikiData !== null && twitterData !== null) {
 
-			inputBox = "<input type='text' id='input' name='search' value='" +
-					   searchString + "' />";
+			var inputBox = "<input type='text' id='input' name='search' value='" +
+							searchString + "' />";
 			res.render('results', { 
 				inputBox: inputBox,
 				wikiResults: wikiData, 
@@ -104,15 +104,57 @@ exports.show = function (req, res) {
 	};
 };
 
+function twitterDataParser (data) {
+
+	var html;
+
+	if (data === null) {
+		html = "<h2>Twitter Results</h2>" + "<p>No search results found.</p>";
+		return html;
+
+	} else if (data.statuses == null) {
+		html = "<h2>Twitter Results</h2>" + "<p>No search results found.</p>";
+		return html;
+
+	} else {
+		if (data.statuses.length === 0) {
+			html = "<h2>Twitter Results</h2>" + "<p>No search results found.</p>";
+			return html;
+		};	
+	};
+
+	var results = data.statuses;
+	html = "<h2>Twitter Results</h2>";
+	html += "<dl>";
+
+	for (var tweet in results) {
+
+		curr = results[tweet];
+		html += "<dt>" + curr.user.screen_name + "</dt>" + 
+				"<dd>" + curr.text + "</dd>";
+	}
+
+	html += "</dl>"
+	return html;
+};
+
 function wikiDataParser (data) {
 
 	var html;
 
-	if (data === null || data.query === null || data.query.search === null) {
+	if (data === null) {
 		html = "<h2>Wiki Results</h2>" + "<p>No search results found.</p>";
 		return html;
-	}
-	else {
+
+	} else if (data.query === null) {
+		html = "<h2>Wiki Results</h2>" + "<p>No search results found.</p>";
+		return html;
+
+	} else if (data.query.search === null) {
+		html = "<h2>Wiki Results</h2>" + "<p>No search results found.</p>";
+		return html;
+
+	} else {
 		if(data.query.search.length === 0) {
 			html = "<h2>Wiki Results</h2>" + "<p>No search results found.</p>";
 			return html;
@@ -139,32 +181,5 @@ function wikiDataParser (data) {
     return html;
 };
 
-function twitterDataParser (data) {
-
-	var html;
-
-	if (data === null || data.statuses == null) {
-		html = "<h2>Twitter Results</h2>" + "<p>No search results found.";
-		return html;
-	}
-	else {
-		if (data.statuses.length === 0) {
-			html = "<h2>Twitter Results</h2>" + "<p>No search results found.</p>";
-			return html;
-		};	
-	};
-
-	var results = data.statuses;
-	html = "<h2>Twitter Results</h2>";
-	html += "<dl>";
-
-	for (var tweet in results) {
-
-		curr = results[tweet];
-		html += "<dt>" + curr.user.screen_name + "</dt>" + 
-				"<dd>" + curr.text + "</dd>";
-	}
-
-	html += "</dl>"
-	return html;
-};
+module.exports.twitterParser = twitterDataParser;
+module.exports.wikiParser = wikiDataParser;
