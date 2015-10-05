@@ -4,7 +4,7 @@ var express = require('express'),
 
 var app = express();
 
-// set the port of our application
+// sets the port for my application
 // process.env.PORT lets the port be set by Heroku
 var port = process.env.PORT || 8080;
 
@@ -19,12 +19,12 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 // set the home page route
 app.get('/', function(req, res) {
 
-    // ejs render automatically looks in the views folder
     res.render('index', {
     	tryAgain: "<div class='tryAgain' ><p></p></div>"
     });
 });
 
+// render the results
 app.post('/results', urlencodedParser, results.show);
 
 app.listen(port, function() {

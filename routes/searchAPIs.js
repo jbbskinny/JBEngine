@@ -8,7 +8,7 @@ exports.show = function (req, res) {
 	var wikiData = null;
 
 	var searchString = req.body.search;
-	console.log(JSON.stringify(searchString));
+	console.log(JSON.stringify(req.body.search));
 
 	if (searchString === "") {
 		res.render('index', {
@@ -17,7 +17,7 @@ exports.show = function (req, res) {
 		});
 
 		return;
-	};
+	};	
 
 	twitterSearch();
 	wikiSearch();
@@ -29,8 +29,7 @@ exports.show = function (req, res) {
 		    complete();
 		};
 		var success = function (data) {
-			console.log(typeof(JSON.parse(data)));
-			twitterData = twitterDataParser(JSON.parse(data));
+			twitterData = twitterDataParser( JSON.parse(data) );
 			complete();
 		};
 
@@ -48,6 +47,7 @@ exports.show = function (req, res) {
 	};
 
 	function wikiSearch () {
+
 		var query = querystring.stringify({
 			action: 'query',
 			list: 'search',
@@ -56,34 +56,30 @@ exports.show = function (req, res) {
 			srwhat: 'text',
 			format: 'json'
 		});
-
 		var options = {
 			hostname: 'en.wikipedia.org',
-			path: '/w/api.php?' + query,
-			headers: {
-				withCredentials: true,
-			}
+			path: '/w/api.php?' + query
 		};
 
 		var req = https.request(options, function(res) {
 
-			if (!res) { wikiData = "An error occured!" };
-
-			console.log("statusCode: ", res.statusCode);
-			res.setEncoding('utf8');
+			if (!res) { 
+				wikiData = "<h2>MediaWiki API is currently down.</h2>";
+				complete();
+			};
 
 			var body = '';
+			console.log("statusCode: ", res.statusCode);
+			res.setEncoding('utf8');
 
 			res.on('data', function(data) {
 				body += data;
 			});
 
 			res.on('end', function() {
-				var jdata = JSON.parse(body);
-				wikiData = wikiDataParser(jdata);
+				wikiData = wikiDataParser( JSON.parse(body) );
 				complete();
 			});
-
 		});
 
 		req.end();
@@ -91,14 +87,16 @@ exports.show = function (req, res) {
 		req.on('error', function (err) {
 			wikiData = "<h2>MediaWiki API is currently down.</h2>";
 			complete();
-		})
-
+		});
 	};
 
 	function complete() {
 		if (wikiData !== null && twitterData !== null) {
-			res.render('results', {
-				inputBox: searchString,
+
+			inputBox = "<input type='text' id='input' name='search' value='" +
+					   searchString + "' />";
+			res.render('results', { 
+				inputBox: inputBox,
 				wikiResults: wikiData, 
 				twitterResults: twitterData
 			});
@@ -107,42 +105,66 @@ exports.show = function (req, res) {
 };
 
 function wikiDataParser (data) {
-    var results = data.query.search;
-    var html;
 
+	var html;
+
+	if (data === null || data.query === null || data.query.search === null) {
+		html = "<h2>Wiki Results</h2>" + "<p>No search results found.</p>";
+		return html;
+	}
+	else {
+		if(data.query.search.length === 0) {
+			html = "<h2>Wiki Results</h2>" + "<p>No search results found.</p>";
+			return html;
+		};
+	};
+
+    var results = data.query.search;
     html = "<h2>Wiki Results</h2>";
     html += "<dl>";
 
     for (var entry in results) {
         if (results.hasOwnProperty(entry)) {
+
             curr = results[entry] // Keeps current obect for cleanliness.
             currURL = "https://en.wikipedia.org/wiki/" + 
                         curr.title.replace(' ', '_');
-
             html += "<dt>" + "<a target='_blank' href='" + currURL + "'>" + 
                     curr.title + "</a>" + "</dt>" + "<dd>" + curr.snippet + 
                     "</dd>";
-        }
+        };
     }
-    html += "</dl>";
 
+    html += "</dl>";
     return html;
 };
 
 function twitterDataParser (data) {
 
-	var results = data.statuses;
 	var html;
 
+	if (data === null || data.statuses == null) {
+		html = "<h2>Twitter Results</h2>" + "<p>No search results found.";
+		return html;
+	}
+	else {
+		if (data.statuses.length === 0) {
+			html = "<h2>Wiki Results</h2>" + "<p>No search results found.</p>";
+			return html;
+		};	
+	};
+
+	var results = data.statuses;
 	html = "<h2>Twitter Results</h2>";
 	html += "<dl>";
 
 	for (var tweet in results) {
+
 		curr = results[tweet];
-		html += "<dt>" + curr.user.screen_name + "</dt>" +
+		html += "<dt>" + curr.user.screen_name + "</dt>" + 
 				"<dd>" + curr.text + "</dd>";
 	}
-	html += "</dl>"
 
+	html += "</dl>"
 	return html;
 };
